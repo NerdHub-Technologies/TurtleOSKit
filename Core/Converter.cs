@@ -1,4 +1,15 @@
-﻿using System;
+﻿/* Converter.cs
+ * ---------------
+ * Project: TurtleKit-Beta
+ * Organization: 32bit Restoration Project
+ * Developers:
+ *      WinMister332 <cemberley@nerdhub.net>
+ * License: MIT <license.txt>
+ * ---------------
+ * Copyright (c) 32bit Restoration Project 2022, All Rights Reserved.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
@@ -6,6 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 
+//TODO: Move to utilities.
 namespace TurtleOSKit.Core
 {
     public static class Converter

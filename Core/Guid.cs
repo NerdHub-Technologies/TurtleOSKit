@@ -1,4 +1,14 @@
-﻿using IL2CPU.API.Attribs;
+﻿/* Guid.cs
+ * ---------------
+ * Project: TurtleKit-Beta
+ * Organization: 32bit Restoration Project
+ * Developers:
+ *      WinMister332 <cemberley@nerdhub.net>
+ * License: MIT <license.txt>
+ * ---------------
+ * Copyright (c) 32bit Restoration Project 2022, All Rights Reserved.
+ */
+using IL2CPU.API.Attribs;
 
 using System;
 using System.Collections.Generic;
