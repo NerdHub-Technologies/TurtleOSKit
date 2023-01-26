@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -19,14 +19,12 @@
     <Folder Include="Console\ProcessInterop\" />
     <Folder Include="Core\CompilerLibs\" />
     <Folder Include="Core\Processing\MS-INI\" />
-    <Folder Include="Core\Processing\FCubed\" />
     <Folder Include="Core\Processing\XAML\" />
     <Folder Include="Debug\Logging\" />
     <Folder Include="Drivers\Graphics\VESA\" />
     <Folder Include="Drivers\Graphics\VGA\" />
     <Folder Include="Graphics\" />
     <Folder Include="Process\" />
-    <Folder Include="Users\" />
   </ItemGroup>
 
 </Project>
