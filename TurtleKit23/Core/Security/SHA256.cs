@@ -4,8 +4,9 @@
  * Organization: 32bit Restoration Project
  * Developers:
  *      WinMister332 <cemberley@nerdhub.net>
- *      Aura Operating System Team [https://github.com/aura-systems/Aura-Operating-System/]
- *      - Valintin Charbonnier <valentinbreiz@gmail.com>
+ *      Copyright (c) 2019, Cosmos
+ *      Copyright (c) 2019, Siaranite Solutions
+ *      Copyright (c) 2012-2013, dewitcher Team
  * License: MIT <license.txt>
  * ---------------
  * Copyright (c) 32bit Restoration Project 2022, All Rights Reserved.
@@ -21,7 +22,7 @@ namespace TurtleOSKit.Core.Security
 {
     public class SHA256
     {
-        private static readonly UInt32[] K = new UInt32[64] {
+        private static readonly uint[] K = new uint[64] {
             0x428A2F98, 0x71374491, 0xB5C0FBCF, 0xE9B5DBA5, 0x3956C25B, 0x59F111F1, 0x923F82A4, 0xAB1C5ED5,
             0xD807AA98, 0x12835B01, 0x243185BE, 0x550C7DC3, 0x72BE5D74, 0x80DEB1FE, 0x9BDC06A7, 0xC19BF174,
             0xE49B69C1, 0xEFBE4786, 0x0FC19DC6, 0x240CA1CC, 0x2DE92C6F, 0x4A7484AA, 0x5CB0A9DC, 0x76F988DA,
@@ -34,14 +35,14 @@ namespace TurtleOSKit.Core.Security
 
         public static string hash(string tohash)
         {
-            return SHA256.ComputeHash(Encoding.ASCII.GetBytes(tohash)).ToUpperInvariant();
+            return ComputeHash(Encoding.ASCII.GetBytes(tohash)).ToUpperInvariant();
         }
 
         public static string ComputeHash(byte[] value)
         {
             var hash = new SHA256();
             hash.AddData(value, 0, (uint)value.Length);
-            string toreturn = Utils.Conversion.Hex(hash.GetHash());
+            string toreturn = Utilities.Conversion.Hex(hash.GetHash());
 
             //Clear variables
             H[0] = 0x6A09E667;
@@ -57,64 +58,64 @@ namespace TurtleOSKit.Core.Security
 
         }
 
-        private static UInt32 ROTL(UInt32 x, byte n)
+        private static uint ROTL(uint x, byte n)
         {
             return (x << n) | (x >> (32 - n));
         }
 
-        private static UInt32 ROTR(UInt32 x, byte n)
+        private static uint ROTR(uint x, byte n)
         {
             return (x >> n) | (x << (32 - n));
         }
 
-        private static UInt32 Ch(UInt32 x, UInt32 y, UInt32 z)
+        private static uint Ch(uint x, uint y, uint z)
         {
             return (x & y) ^ ((~x) & z);
         }
 
-        private static UInt32 Maj(UInt32 x, UInt32 y, UInt32 z)
+        private static uint Maj(uint x, uint y, uint z)
         {
             return (x & y) ^ (x & z) ^ (y & z);
         }
 
-        private static UInt32 Sigma0(UInt32 x)
+        private static uint Sigma0(uint x)
         {
             return ROTR(x, 2) ^ ROTR(x, 13) ^ ROTR(x, 22);
         }
 
-        private static UInt32 Sigma1(UInt32 x)
+        private static uint Sigma1(uint x)
         {
             return ROTR(x, 6) ^ ROTR(x, 11) ^ ROTR(x, 25);
         }
 
-        private static UInt32 sigma0(UInt32 x)
+        private static uint sigma0(uint x)
         {
             return ROTR(x, 7) ^ ROTR(x, 18) ^ (x >> 3);
         }
 
-        private static UInt32 sigma1(UInt32 x)
+        private static uint sigma1(uint x)
         {
             return ROTR(x, 17) ^ ROTR(x, 19) ^ (x >> 10);
         }
 
 
-        private static UInt32[] H = new UInt32[8] {
+        private static uint[] H = new uint[8] {
             0x6A09E667, 0xBB67AE85, 0x3C6EF372, 0xA54FF53A, 0x510E527F, 0x9B05688C, 0x1F83D9AB, 0x5BE0CD19
         };
 
         private byte[] pending_block = new byte[64];
         private uint pending_block_off = 0;
-        private UInt32[] uint_buffer = new UInt32[16];
+        private uint[] uint_buffer = new uint[16];
 
-        private UInt64 bits_processed = 0;
+        private ulong bits_processed = 0;
 
         private bool closed = false;
 
-        private void processBlock(UInt32[] M)
+        private void processBlock(uint[] M)
         {
 
             // 1. Prepare the message schedule (W[t]):
-            UInt32[] W = new UInt32[64];
+            uint[] W = new uint[64];
             for (int t = 0; t < 16; ++t)
             {
                 W[t] = M[t];
@@ -126,7 +127,7 @@ namespace TurtleOSKit.Core.Security
             }
 
             // 2. Initialize the eight working variables with the (i-1)-st hash value:
-            UInt32 a = H[0],
+            uint   a = H[0],
                    b = H[1],
                    c = H[2],
                    d = H[3],
@@ -138,8 +139,8 @@ namespace TurtleOSKit.Core.Security
             // 3. For t=0 to 63:
             for (int t = 0; t < 64; ++t)
             {
-                UInt32 T1 = h + Sigma1(e) + Ch(e, f, g) + K[t] + W[t];
-                UInt32 T2 = Sigma0(a) + Maj(a, b, c);
+                uint T1 = h + Sigma1(e) + Ch(e, f, g) + K[t] + W[t];
+                uint T2 = Sigma0(a) + Maj(a, b, c);
                 h = g;
                 g = f;
                 f = e;
@@ -215,7 +216,7 @@ namespace TurtleOSKit.Core.Security
         {
             if (!closed)
             {
-                UInt64 size_temp = bits_processed;
+                ulong size_temp = bits_processed;
 
                 AddData(new byte[1] { 0x80 }, 0, 1);
 
@@ -240,15 +241,15 @@ namespace TurtleOSKit.Core.Security
             return H;
         }
 
-        private static void toUintArray(byte[] src, UInt32[] dest)
+        private static void toUintArray(byte[] src, uint[] dest)
         {
             for (uint i = 0, j = 0; i < dest.Length; ++i, j += 4)
             {
-                dest[i] = ((UInt32)src[j + 0] << 24) | ((UInt32)src[j + 1] << 16) | ((UInt32)src[j + 2] << 8) | ((UInt32)src[j + 3]);
+                dest[i] = ((uint)src[j + 0] << 24) | ((uint)src[j + 1] << 16) | ((uint)src[j + 2] << 8) | ((uint)src[j + 3]);
             }
         }
 
-        private static byte[] toByteArray(List<UInt32> src)
+        private static byte[] toByteArray(List<uint> src)
         {
             byte[] dest = new byte[src.Count * 4];
             int pos = 0;

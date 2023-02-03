@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace TurtleOSKit.Core
 {
+    /// <summary>
+    /// TurtleKernel (TKernel, for short) is the base class for all TurtleOS kernels.
+    /// </summary>
     public abstract class TKernel : Kernel
     {
         public static long Ticks { get; private set; }

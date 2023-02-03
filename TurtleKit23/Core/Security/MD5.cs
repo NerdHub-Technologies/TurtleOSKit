@@ -4,8 +4,9 @@
  * Organization: 32bit Restoration Project
  * Developers:
  *      WinMister332 <cemberley@nerdhub.net>
- *      Aura Operating System Team [https://github.com/aura-systems/Aura-Operating-System/]
- *      - Alexy DA Cruz <dacruzalexy@gmail.com>
+ *      Copyright (c) 2019, Cosmos
+ *      Copyright (c) 2019, Siaranite Solutions
+ *      Copyright (c) 2012-2013, dewitcher Team
  * License: MIT <license.txt>
  * ---------------
  * Copyright (c) 32bit Restoration Project 2022, All Rights Reserved.
@@ -80,12 +81,12 @@ namespace TurtleOSKit.Core.Security
             get
             {
                 string st;
-                char[] tempCharArray = new Char[m_byteInput.Length];
+                char[] tempCharArray = new char[m_byteInput.Length];
 
                 for (int i = 0; i < m_byteInput.Length; i++)
                     tempCharArray[i] = (char)m_byteInput[i];
 
-                st = new String(tempCharArray);
+                st = new string(tempCharArray);
                 return st;
             }
             set
