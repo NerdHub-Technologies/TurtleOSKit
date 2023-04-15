@@ -45,7 +45,12 @@ namespace CommandSharp.Commands
                 }
                 else
                 {
-                    Console.WriteLine(args.GetArgumentAtPosition(0));
+                    for (int i = 0; i < args.Count; i++)
+                    {
+                        Console.Write(args.GetArgumentAtPosition(i) + " ");
+                    }
+                    Console.WriteLine();
+                    //Console.WriteLine(args.GetArgumentAtPosition(0));
                 }    
             }
             return true;
